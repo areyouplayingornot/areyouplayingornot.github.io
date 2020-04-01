@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Matthews pong type game</title>
+        <title>Ping</title>
         <style type="text/css">
             html, body {
                 background: #448cc7;
@@ -12,13 +12,15 @@
         <header class="info">
             <hgroup class="about">
                 <h1>Ping</h1>
-                <h2>Press the left arrow to start</h2>
+                <h2>Press the space bar to start</h2>
                 <h2>The game uses the up and down arrow keys for control</h2>
-
+		
             
         </header>
-        <p>
-        <a href="index.html">Or switch to Stone Crusher game</a>
+        <p>Switch to 
+        <a href="stonecrusher.html">Stone Crusher</a>
+	or go back to
+	<a href="index.html">hub</a>
         </p>
         
         <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
@@ -137,7 +139,7 @@ function draw(){
     
 	}
 }
-if (keyIsDown(LEFT_ARROW)) {
+if (keyIsDown(32)) {
   	x=1
 	}	
 }
