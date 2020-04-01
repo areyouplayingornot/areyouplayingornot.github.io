@@ -1,0 +1,130 @@
+<html>
+    <head>
+        <title>MattG brickbreaker</title>
+        <style type="text/css">
+            html, body {
+                background: #448cc7;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <header class="info">
+            <hgroup class="about">
+                <h1>Brickbreaker</h1>
+                <h2>Press the left arrow to start</h2>
+                <h2>The game uses the mouse to control it so be ready</h2>
+            
+        </header>
+        <p>
+        <a href="file:///Users/MJE/Documents/pong.html">Pong game</a>
+        </p>
+        
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+<script>
+
+var ball
+var paddle
+var brick
+var bricks=[]
+var number
+var counter=0
+var xaok = 0
+  
+function setup() {
+  
+  createCanvas(700, 500);
+  background('black');
+  paddle = {
+		xPos : 300,
+		yPos : 400,
+		length : 100,
+		height : 10
+	}
+	ball = {
+		xPos : paddle.xPos,
+		yPos : paddle.yPos,
+		size : 30,
+		xSpeed : 5,
+		ySpeed : -5	
+	}
+	bricks=[]
+	for (var x=0;x<48;x+=1){
+		brick = {
+			xPos : ((int)(x%8)*75)+45,
+			yPos : ((int)(x/8)*40)+10,
+			length : 70,
+			height : 30
+		}
+		bricks.push(brick)
+	}
+	if (random(1,2)>1.5){
+		ball.xSpeed=-ball.xSpeed
+	}
+}
+function draw(){
+
+  if (xaok==1){
+	background('black');
+	ellipse(ball.xPos,ball.yPos,ball.size,ball.size)
+	ball.xPos=ball.xPos+ball.xSpeed
+	ball.yPos=ball.yPos+ball.ySpeed
+	paddle.xPos=mouseX-(paddle.length/2)
+	rect(paddle.xPos,paddle.yPos,paddle.length,paddle.height)
+	for (var x=0;x<bricks.length;x+=1){
+		if ((bricks[x] != 100)){
+			rect(bricks[x].xPos,bricks[x].yPos,bricks[x].length,bricks[x].height)
+	}}
+	var r = brickTouchingBall()			 
+	if (r<bricks.length){
+		ball.ySpeed=-ball.ySpeed
+		bricks[r]=100
+    ball.xPos=ball.xPos+ball.xSpeed
+		ball.yPos=ball.yPos+ball.ySpeed
+	}
+	if (ball.xPos > 700){
+		ball.xSpeed=-ball.xSpeed		
+	}
+	if (ball.xPos < 0){
+		ball.xSpeed=-ball.xSpeed		
+	}
+
+	if (ball.yPos < 0){
+		ball.ySpeed=-ball.ySpeed		
+	}
+	if (paddleTouchingBall()==1){
+		ball.ySpeed=-(ball.ySpeed)
+    ball.xPos=ball.xPos+ball.xSpeed
+		ball.yPos=ball.yPos+ball.ySpeed
+	}
+	if (paddleTouchingBall()==(2)){
+		ball.xSpeed=-(ball.xSpeed)
+	}
+  if(ball.yPos>500){
+    setup()
+    
+  }	
+  }
+if (keyIsDown(LEFT_ARROW)) {
+  	xaok=1
+	}		
+}
+function paddleTouchingBall(){
+	if ((ball.xPos > paddle.xPos) && (ball.xPos < paddle.xPos +100) && (ball.yPos+5 > paddle.yPos) && (ball.yPos < paddle.yPos +25)){
+		return 1
+		}	
+	else {
+		return 5
+	}}
+function brickTouchingBall(){
+	for (var i=0;i<bricks.length;i+=1){
+		if((ball.xPos > bricks[i].xPos) && (ball.xPos < bricks[i].xPos +bricks[i].length) && (ball.yPos > bricks[i].yPos) && (ball.yPos < bricks[i].yPos +bricks[i].height)){
+			return i	
+		}}}
+		
+</script>
+
+
+    </body>
+</html>
+
