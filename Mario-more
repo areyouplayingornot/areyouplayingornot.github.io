@@ -1,0 +1,44 @@
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    // Get user input for height of pyramid and validate
+    int n;
+    do
+    {
+        n = get_int("Input a positive number between 1 and 8: ");
+    }
+    while (n < 1 || n > 8);
+
+    // Loop over n rows
+    for (int i = 0; i < n; i++)
+    {
+        // Loop over n columns for first part of pyramid
+        for (int j = 0; j < n; j++)
+        {
+            // Output a space or # depending on column number
+            if (j < n - i - 1)
+            {
+                printf(" ");
+            }
+            else
+            {
+                printf("#");
+            }
+        }
+        // Add the gap
+        printf("  ");
+        // Loop over n columns again for second part of pyramid
+        for (int k = 0; k < n; k++)
+        {
+            // Output a # depending on column number
+            if (k <= i)
+            {
+                printf("#");
+            }
+        }
+        // Move to next row
+        printf("\n");
+    }
+}
